@@ -4,3 +4,14 @@
 *.jar
 *.war
 *.ear
+
+/balloons-common/target
+/balloons-parent/target
+/balloons-parent/.settings
+/balloons-common/.settings
+/balloons-server/target
+/balloons-server/.settings
+/balloons-server/.cache
+/balloons-client/.cache
+/balloons-client/.settings
+/balloons-client/target
