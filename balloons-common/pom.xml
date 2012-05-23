@@ -8,14 +8,10 @@
     <groupId>org.housered.balloons</groupId>
     <artifactId>balloons-parent</artifactId>
     <version>0.0.1</version>
-    <relativePath>../balloons-parent/pom.xml</relativePath>
+    <relativePath>../balloons-parent</relativePath>
   </parent>
 
   <dependencies>
   </dependencies>
-
-  <build>
-    <sourceDirectory>src/main/scala</sourceDirectory>
-    <testSourceDirectory>src/test/scala</testSourceDirectory>
-  </build>
+  
 </project>
