@@ -15,11 +15,30 @@
 		<scala.version>2.9.2</scala.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>checked-in-repo</id>
+			<url>file://${basedir}/../lib</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
 			<version>${scala.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl.lwjgl</groupId>
+			<artifactId>lwjgl</artifactId>
+			<version>2.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>ode4j</groupId>
+			<artifactId>ode4j</artifactId>
+			<version>0.11.1</version>
+			<scope>provided</scope>
+			<type>sources-jar</type>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -55,6 +74,20 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.googlecode.mavennatives</groupId>
+				<artifactId>maven-nativedependencies-plugin</artifactId>
+				<version>0.0.6</version>
+				<executions>
+					<execution>
+						<id>unpacknatives</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
