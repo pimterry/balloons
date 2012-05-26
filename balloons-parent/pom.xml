@@ -18,10 +18,6 @@
 
 	<repositories>
 		<repository>
-			<id>checked-in-repo</id>
-			<url>file://${basedir}/../lib</url>
-		</repository>
-		<repository>
 			<id>sonatype-public</id>
 			<name>sonatype public</name>
 			<url>https://oss.sonatype.org/content/groups/public/</url>
@@ -29,42 +25,6 @@
 	</repositories>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>${scala.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jme3</groupId>
-			<artifactId>jmonkeyengine3</artifactId>
-			<version>${jme.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jme3</groupId>
-			<artifactId>lwjgl</artifactId>
-			<version>${jme.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jme3</groupId>
-			<artifactId>jbullet</artifactId>
-			<version>${jme.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jme3</groupId>
-			<artifactId>stack-alloc</artifactId>
-			<version>${jme.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jme3</groupId>
-			<artifactId>vecmath</artifactId>
-			<version>${jme.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>

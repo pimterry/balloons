@@ -15,3 +15,5 @@
 /balloons-client/.cache
 /balloons-client/.settings
 /balloons-client/target
+/balloons-client/lwjgl64.dll
+/balloons-client/OpenAL64.dll
