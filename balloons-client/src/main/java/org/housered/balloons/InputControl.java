@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.housered.balloons.command.Command;
 import org.housered.balloons.command.CommandSubscriber;
+import org.housered.balloons.command.FireWeaponCommand;
 
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.AnalogListener;
@@ -15,6 +16,11 @@ import com.jme3.scene.control.Control;
 
 public class InputControl extends AbstractControl implements ActionListener, AnalogListener
 {
+	
+	public static enum ACTIONS
+	{
+		FIRE
+	}
 
 	private ArrayList<CommandSubscriber> subscribers = new ArrayList<CommandSubscriber>();
 
@@ -45,6 +51,18 @@ public class InputControl extends AbstractControl implements ActionListener, Ana
 	@Override
 	public void onAction(String name, boolean keyPressed, float tpf)
 	{
+		Command cmd = null;
+		
+		if (ACTIONS.FIRE.name().equals(name))
+		{
+			cmd = new FireWeaponCommand(keyPressed);
+		}
+		else
+		{
+			throw new IllegalArgumentException("Bad action");
+		}
+		
+		raiseCommand(cmd);
 	}
 
 	public void registerSubscriber(CommandSubscriber subscriber)
@@ -52,7 +70,7 @@ public class InputControl extends AbstractControl implements ActionListener, Ana
 		subscribers.add(subscriber);
 	}
 
-	public void raiseCommand(Command command)
+	private void raiseCommand(Command command)
 	{
 		for (CommandSubscriber subscriber : subscribers)
 		{
