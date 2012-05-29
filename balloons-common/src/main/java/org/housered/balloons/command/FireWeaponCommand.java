@@ -15,6 +15,7 @@ public class FireWeaponCommand extends Command
 	public FireWeaponCommand(boolean keyPressed)
 	{
 		this.keyPressed = keyPressed;
+		setReliable(true);
 	}
 	
 	public boolean isKeyPressed()

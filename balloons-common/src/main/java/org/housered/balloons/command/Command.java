@@ -4,8 +4,4 @@ import com.jme3.network.AbstractMessage;
 
 public class Command extends AbstractMessage
 {
-	public boolean requiresReliable()
-	{
-		return true;
-	}
 }
