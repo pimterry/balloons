@@ -16,138 +16,113 @@
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-core</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 
 		<!-- LWJGL stuff -->
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-lwjgl</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-lwjgl-natives</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>lwjgl</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 
 		<!-- Bullet stuff -->
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-jbullet</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jbullet</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
-
 
 		<!-- Feature libs -->
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-blender</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-desktop</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-plugins</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-terrain</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 
 		<!-- Ogg audio stuff -->
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-jogg</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>j-ogg-oggd</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>j-ogg-vorbisd</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 
 		<!-- Third party libs -->
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jinput</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>eventbus</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>stack-alloc</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>vecmath</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>xmlpull-xpp3</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 
 		<!-- Nifty GUI -->
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>jME3-niftygui</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>nifty</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>nifty-default-controls</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<!-- WARNING : Large - about 20M -->
 			<groupId>com.jme3</groupId>
 			<artifactId>nifty-examples</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jme3</groupId>
 			<artifactId>nifty-style-black</artifactId>
-			<version>${jme.version}</version>
 		</dependency>
 
 		<!-- Test-phase-only dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
