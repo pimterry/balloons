@@ -7,18 +7,16 @@ import com.jme3.network.Client;
 
 public class ClientCommandTransmitter implements CommandSubscriber
 {
+    private Client client;
 
-	private Client client;
+    public ClientCommandTransmitter(Client client)
+    {
+        this.client = client;
+    }
 
-	public ClientCommandTransmitter(Client client)
-	{
-		this.client = client;
-	}
-
-	@Override
-	public void commandRaised(Command command)
-	{
-		this.client.send(command);
-	}
-	
+    @Override
+    public void commandRaised(Command command)
+    {
+        this.client.send(command);
+    }
 }

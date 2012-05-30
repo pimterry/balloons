@@ -12,6 +12,13 @@
 	</parent>
 
 	<dependencies>
+		<!-- Sibling projects -->
+		<dependency>
+			<groupId>org.housered.balloons</groupId>
+			<artifactId>balloons-common</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
 		<!-- The core library -->
 		<dependency>
 			<groupId>com.jme3</groupId>
