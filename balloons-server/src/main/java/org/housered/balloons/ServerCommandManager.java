@@ -1,5 +1,6 @@
 package org.housered.balloons;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -14,7 +15,7 @@ import com.jme3.network.Server;
 
 public class ServerCommandManager implements MessageListener<HostedConnection>, ConnectionListener, CommandProvider
 {
-    private Map<Integer, Queue<Command>> bufferedCommands;
+    private Map<Integer, Queue<Command>> bufferedCommands = new HashMap<Integer, Queue<Command>>();
 
     @Override
     public void messageReceived(HostedConnection source, Message message)

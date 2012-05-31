@@ -7,20 +7,21 @@ import static org.housered.balloons.Globals.GAME_VERSION;
 
 import java.io.IOException;
 
-import com.jme3.app.SimpleApplication;
-import com.jme3.network.Network;
-import com.jme3.network.Server;
-import com.jme3.system.JmeContext.Type;
+import org.housered.balloons.multiplayer.ClientCommandTransmitter;
 
-public class ServerApplication extends SimpleApplication
+import com.jme3.app.SimpleApplication;
+import com.jme3.network.Client;
+import com.jme3.network.Network;
+
+public class ClientApplication extends SimpleApplication
 {
-    private Server server;
-    private ServerCommandManager commandListener;
+    private Client client;
+    private ClientCommandTransmitter commandTransmitter;
 
     public static void main(String[] args)
     {
-        ServerApplication server = new ServerApplication();
-        server.start(Type.Headless);
+        ClientApplication app = new ClientApplication();
+        app.start();
     }
 
     @Override
@@ -33,27 +34,24 @@ public class ServerApplication extends SimpleApplication
     {
         try
         {
-            server = Network.createServer(GAME_NAME, GAME_VERSION, DEFAULT_TCP_PORT, DEFAULT_UDP_PORT);
-            server.start();
+            client = Network.connectToServer(GAME_NAME, GAME_VERSION, "localhost", DEFAULT_TCP_PORT, DEFAULT_UDP_PORT);
+            client.start();
         }
         catch (IOException e)
         {
-            //FIXME: add logging
+            // TODO Auto-generated catch block
             e.printStackTrace();
             System.exit(1);
         }
-
+        
         SerializableRegistry.registerSerializables();
-        commandListener = new ServerCommandManager();
-
-        server.addConnectionListener(commandListener);
-        server.addMessageListener(commandListener);
+        commandTransmitter = new ClientCommandTransmitter(client);
     }
     
     @Override
     public void destroy()
     {
-        server.close();
+        client.close();
         super.destroy();
     }
 }
