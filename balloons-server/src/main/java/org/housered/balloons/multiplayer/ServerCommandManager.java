@@ -1,10 +1,11 @@
-package org.housered.balloons;
+package org.housered.balloons.multiplayer;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.housered.balloons.CommandProvider;
 import org.housered.balloons.command.Command;
 
 import com.jme3.network.ConnectionListener;

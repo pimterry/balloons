@@ -7,6 +7,8 @@ import static org.housered.balloons.Globals.GAME_VERSION;
 
 import java.io.IOException;
 
+import org.housered.balloons.multiplayer.ServerCommandManager;
+
 import com.jme3.app.SimpleApplication;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
