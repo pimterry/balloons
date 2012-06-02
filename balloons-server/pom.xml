@@ -7,16 +7,16 @@
 	<parent>
 		<groupId>org.housered.balloons</groupId>
 		<artifactId>balloons-parent</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../balloons-parent</relativePath>
 	</parent>
 
 	<dependencies>
 		<!-- Sibling projects -->
 		<dependency>
-			<groupId>org.housered.balloons</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>balloons-common</artifactId>
-			<version>0.0.1</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<!-- The core library -->

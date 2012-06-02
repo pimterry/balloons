@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.housered.balloons</groupId>
 		<artifactId>balloons-parent</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../balloons-parent</relativePath>
 	</parent>
 
