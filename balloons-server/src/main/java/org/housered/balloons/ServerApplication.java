@@ -33,6 +33,7 @@ public class ServerApplication extends SimpleApplication
 
     private void initNetwork()
     {
+        SerializableRegistry.registerSerializables();
         try
         {
             server = Network.createServer(GAME_NAME, GAME_VERSION, DEFAULT_TCP_PORT, DEFAULT_UDP_PORT);
@@ -45,7 +46,6 @@ public class ServerApplication extends SimpleApplication
             System.exit(1);
         }
 
-        SerializableRegistry.registerSerializables();
         commandListener = new ServerCommandManager();
 
         server.addConnectionListener(commandListener);

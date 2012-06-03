@@ -8,6 +8,7 @@ import static org.housered.balloons.Globals.GAME_VERSION;
 import java.io.IOException;
 
 import org.housered.balloons.multiplayer.ClientCommandTransmitter;
+import org.housered.balloons.multiplayer.ClientStateManager;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.network.Client;
@@ -17,6 +18,8 @@ public class ClientApplication extends SimpleApplication
 {
     private Client client;
     private ClientCommandTransmitter commandTransmitter;
+    private ClientStateManager stateManager;
+    private WorldManager worldManager;
 
     public static void main(String[] args)
     {
@@ -32,6 +35,7 @@ public class ClientApplication extends SimpleApplication
 
     private void initNetwork()
     {
+        SerializableRegistry.registerSerializables();
         try
         {
             client = Network.connectToServer(GAME_NAME, GAME_VERSION, "localhost", DEFAULT_TCP_PORT, DEFAULT_UDP_PORT);
@@ -44,8 +48,8 @@ public class ClientApplication extends SimpleApplication
             System.exit(1);
         }
         
-        SerializableRegistry.registerSerializables();
         commandTransmitter = new ClientCommandTransmitter(client);
+        stateManager = new ClientStateManager(worldManager, client);
     }
     
     @Override
