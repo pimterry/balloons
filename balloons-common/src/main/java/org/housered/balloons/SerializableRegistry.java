@@ -4,8 +4,8 @@ import static com.jme3.network.serializing.Serializer.registerClass;
 import static com.jme3.network.serializing.Serializer.registerClasses;
 
 import org.housered.balloons.command.FireWeaponCommand;
+import org.housered.balloons.state.SimpleState;
 import org.housered.balloons.state.Snapshot;
-import org.housered.balloons.state.State;
 
 public class SerializableRegistry
 {
@@ -20,7 +20,8 @@ public class SerializableRegistry
     public static void registerSerializables()
     {
         //states
-        registerClasses(Snapshot.class, State.class);
+        registerClasses(Snapshot.class);
+        registerClasses(SimpleState.class);
 
         //commands
         registerClass(FireWeaponCommand.class);
