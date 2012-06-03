@@ -51,7 +51,7 @@ public class ServerApplication extends SimpleApplication
         server.addConnectionListener(commandListener);
         server.addMessageListener(commandListener);
     }
-    
+
     @Override
     public void destroy()
     {

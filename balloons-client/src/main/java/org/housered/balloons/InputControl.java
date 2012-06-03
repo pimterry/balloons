@@ -16,65 +16,65 @@ import com.jme3.scene.control.Control;
 
 public class InputControl extends AbstractControl implements ActionListener, AnalogListener
 {
-	
-	public static enum ACTIONS
-	{
-		FIRE
-	}
 
-	private ArrayList<CommandSubscriber> subscribers = new ArrayList<CommandSubscriber>();
+    public static enum ACTIONS
+    {
+        FIRE
+    }
 
-	@Override
-	public Control cloneForSpatial(Spatial arg0)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+    private ArrayList<CommandSubscriber> subscribers = new ArrayList<CommandSubscriber>();
 
-	@Override
-	protected void controlRender(RenderManager arg0, ViewPort arg1)
-	{
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public Control cloneForSpatial(Spatial arg0)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	protected void controlUpdate(float arg0)
-	{
-		// TODO Auto-generated method stub
-	}
+    @Override
+    protected void controlRender(RenderManager arg0, ViewPort arg1)
+    {
+        // TODO Auto-generated method stub
+    }
 
-	@Override
-	public void onAnalog(String name, float value, float tpf)
-	{
-	}
+    @Override
+    protected void controlUpdate(float arg0)
+    {
+        // TODO Auto-generated method stub
+    }
 
-	@Override
-	public void onAction(String name, boolean keyPressed, float tpf)
-	{
-		Command cmd = null;
-		
-		if (ACTIONS.FIRE.name().equals(name))
-		{
-			cmd = new FireWeaponCommand(keyPressed);
-		}
-		else
-		{
-			throw new IllegalArgumentException("Bad action");
-		}
-		
-		raiseCommand(cmd);
-	}
+    @Override
+    public void onAnalog(String name, float value, float tpf)
+    {
+    }
 
-	public void registerSubscriber(CommandSubscriber subscriber)
-	{
-		subscribers.add(subscriber);
-	}
+    @Override
+    public void onAction(String name, boolean keyPressed, float tpf)
+    {
+        Command cmd = null;
 
-	private void raiseCommand(Command command)
-	{
-		for (CommandSubscriber subscriber : subscribers)
-		{
-			subscriber.commandRaised(command);
-		}
-	}
+        if (ACTIONS.FIRE.name().equals(name))
+        {
+            cmd = new FireWeaponCommand(keyPressed);
+        }
+        else
+        {
+            throw new IllegalArgumentException("Bad action");
+        }
+
+        raiseCommand(cmd);
+    }
+
+    public void registerSubscriber(CommandSubscriber subscriber)
+    {
+        subscribers.add(subscriber);
+    }
+
+    private void raiseCommand(Command command)
+    {
+        for (CommandSubscriber subscriber : subscribers)
+        {
+            subscriber.commandRaised(command);
+        }
+    }
 }

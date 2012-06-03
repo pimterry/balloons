@@ -47,12 +47,12 @@ public class ClientApplication extends SimpleApplication
             e.printStackTrace();
             System.exit(1);
         }
-        
+
         worldManager = new WorldManager(assetManager);
         commandTransmitter = new ClientCommandTransmitter(client);
         stateManager = new ClientStateManager(worldManager, client);
     }
-    
+
     @Override
     public void destroy()
     {

@@ -51,7 +51,7 @@ public class ClientStateManager implements MessageListener<Client>
     {
         long entityId = state.getEntityId();
         StateReceiver stateReceiver;
-        
+
         if (stateReceivers.containsKey(entityId))
         {
             stateReceiver = stateReceivers.get(state.getEntityId());
@@ -61,7 +61,7 @@ public class ClientStateManager implements MessageListener<Client>
             stateReceiver = worldManager.createStateReceivingEntity(entityId, state);
             stateReceivers.put(entityId, stateReceiver);
         }
-        
+
         stateReceiver.updateWithState(state);
     }
 }
