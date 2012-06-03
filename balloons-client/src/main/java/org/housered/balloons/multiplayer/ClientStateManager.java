@@ -50,14 +50,18 @@ public class ClientStateManager implements MessageListener<Client>
     private void handleState(State state)
     {
         long entityId = state.getEntityId();
+        StateReceiver stateReceiver;
+        
         if (stateReceivers.containsKey(entityId))
         {
-            stateReceivers.get(entityId).updateWithState(state);
+            stateReceiver = stateReceivers.get(state.getEntityId());
         }
         else
         {
-            StateReceiver newEntity = worldManager.createStateReceivingEntity(entityId, state);
-            stateReceivers.put(entityId, newEntity);
+            stateReceiver = worldManager.createStateReceivingEntity(entityId, state);
+            stateReceivers.put(entityId, stateReceiver);
         }
+        
+        stateReceiver.updateWithState(state);
     }
 }
