@@ -5,6 +5,9 @@ import org.housered.balloons.command.CommandSubscriber;
 
 import com.jme3.network.Client;
 
+/**
+ * Responsible for sending commands that have been raised by the client to the server.
+ */
 public class ClientCommandTransmitter implements CommandSubscriber
 {
     private Client client;
@@ -17,6 +20,6 @@ public class ClientCommandTransmitter implements CommandSubscriber
     @Override
     public void commandRaised(Command command)
     {
-        this.client.send(command);
+        client.send(command);
     }
 }
