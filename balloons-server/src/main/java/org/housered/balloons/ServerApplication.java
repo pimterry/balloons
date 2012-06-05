@@ -25,6 +25,7 @@ public class ServerApplication extends SimpleApplication
 
     public static void main(String[] args)
     {
+        Globals.fixLogging();
         ServerApplication server = new ServerApplication();
         server.start(Type.Headless);
     }
@@ -42,13 +43,13 @@ public class ServerApplication extends SimpleApplication
         Spatial entity = worldManager.createEntity();
         getRootNode().attachChild(entity);
     }
-    
+
     private void initManagers()
     {
         commandListener = new ServerCommandManager(server);
         worldManager = new WorldManager(assetManager);
         stateManager = new ServerStateManager(worldManager, server);
-        
+
         getStateManager().attach(stateManager);
     }
 

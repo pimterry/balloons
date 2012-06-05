@@ -23,6 +23,7 @@ public class ClientApplication extends SimpleApplication
 
     public static void main(String[] args)
     {
+        Globals.fixLogging();
         ClientApplication app = new ClientApplication();
         app.start();
     }
