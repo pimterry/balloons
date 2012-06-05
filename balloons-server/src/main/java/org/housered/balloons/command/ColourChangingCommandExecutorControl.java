@@ -45,6 +45,7 @@ public class ColourChangingCommandExecutorControl extends AbstractControl implem
     public void executeCommand(Command cmd)
     {
         LOG.debug("Nothing goin' on here - {}", cmd);
+        executeCommand((FireWeaponCommand) cmd);
     }
 
     public void executeCommand(FireWeaponCommand cmd)
@@ -66,10 +67,14 @@ public class ColourChangingCommandExecutorControl extends AbstractControl implem
     {
         if (spatial instanceof Geometry)
         {
-            //FIXME: this doesn't actually change the colour of the damn thing
+            //TODO: duh, colour isn't synced
             Geometry geo = (Geometry) spatial;
             geo.getMaterial().setColor("Color", ColorRGBA.randomColor());
+            
+            
         }
+        
+        spatial.move(0.1f, 0, 0);
     }
 
     @Override
