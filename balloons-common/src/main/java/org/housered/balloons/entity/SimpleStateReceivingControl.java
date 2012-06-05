@@ -16,7 +16,7 @@ public class SimpleStateReceivingControl extends AbstractControl implements Stat
 {
     private static final Logger LOG = LoggerFactory.getLogger(SimpleStateReceivingControl.class);
 
-    private Object syncObject = 5L;
+    private Object syncObject = new Object();
     private State state;
     private State stateBuffer;
 
