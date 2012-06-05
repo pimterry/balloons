@@ -9,6 +9,8 @@ import java.io.IOException;
 
 import org.housered.balloons.multiplayer.ClientCommandTransmitter;
 import org.housered.balloons.multiplayer.ClientStateManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.network.Client;
@@ -16,6 +18,8 @@ import com.jme3.network.Network;
 
 public class ClientApplication extends SimpleApplication
 {
+    private static final Logger LOG = LoggerFactory.getLogger(ClientApplication.class);
+    
     private Client client;
     private ClientCommandTransmitter commandTransmitter;
     private ClientStateManager stateManager;
@@ -32,6 +36,16 @@ public class ClientApplication extends SimpleApplication
     public void simpleInitApp()
     {
         initNetwork();
+        initManagers();
+    }
+    
+    private void initManagers()
+    {
+        worldManager = new WorldManager(getRootNode(), assetManager);
+        commandTransmitter = new ClientCommandTransmitter(client);
+        stateManager = new ClientStateManager(worldManager, client);
+        
+        getStateManager().attach(worldManager);
     }
 
     private void initNetwork()
@@ -44,15 +58,12 @@ public class ClientApplication extends SimpleApplication
         }
         catch (IOException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            System.exit(1);
+            LOG.error("Could not create client", e);
+            throw new RuntimeException(e);
         }
-
-        worldManager = new WorldManager(assetManager);
-        commandTransmitter = new ClientCommandTransmitter(client);
-        stateManager = new ClientStateManager(worldManager, client);
     }
+    
+    
 
     @Override
     public void destroy()

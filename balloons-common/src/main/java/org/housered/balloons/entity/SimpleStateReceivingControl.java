@@ -3,6 +3,8 @@ package org.housered.balloons.entity;
 import org.housered.balloons.state.SimpleState;
 import org.housered.balloons.state.State;
 import org.housered.balloons.state.StateReceiver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
@@ -12,6 +14,9 @@ import com.jme3.scene.control.Control;
 
 public class SimpleStateReceivingControl extends AbstractControl implements StateReceiver
 {
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleStateReceivingControl.class);
+
+    private Object syncObject = 5L;
     private State state;
     private State stateBuffer;
 
@@ -26,7 +31,7 @@ public class SimpleStateReceivingControl extends AbstractControl implements Stat
     @Override
     public void updateWithState(State state)
     {
-        synchronized (this.state)
+        synchronized (syncObject)
         {
             this.state = state;
         }
@@ -35,14 +40,18 @@ public class SimpleStateReceivingControl extends AbstractControl implements Stat
     @Override
     protected void controlUpdate(float tpf)
     {
-        synchronized (state)
+        synchronized (syncObject)
         {
+            if (state == null)
+                return;
+
             State temp = state;
             state = stateBuffer;
             stateBuffer = temp;
         }
 
-        getSpatial().setLocalTranslation(((SimpleState) state).getPosition());
+        LOG.debug("Updating entity to position {}", ((SimpleState) stateBuffer).getPosition());
+        getSpatial().setLocalTranslation(((SimpleState) stateBuffer).getPosition());
     }
 
     @Override

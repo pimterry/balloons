@@ -7,8 +7,11 @@ import static org.housered.balloons.Globals.GAME_VERSION;
 
 import java.io.IOException;
 
+import org.housered.balloons.entity.SimpleStateCreatingControl;
 import org.housered.balloons.multiplayer.ServerCommandManager;
 import org.housered.balloons.multiplayer.ServerStateManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.network.Network;
@@ -18,10 +21,14 @@ import com.jme3.system.JmeContext.Type;
 
 public class ServerApplication extends SimpleApplication
 {
+    private static final Logger LOG = LoggerFactory.getLogger(ServerApplication.class);
+
     private Server server;
     private ServerCommandManager commandListener;
     private ServerStateManager stateManager;
     private WorldManager worldManager;
+
+    private Spatial tempEntity;
 
     public static void main(String[] args)
     {
@@ -33,23 +40,33 @@ public class ServerApplication extends SimpleApplication
     @Override
     public void simpleInitApp()
     {
+        LOG.debug("Initialising server");
         initNetwork();
         initManagers();
         tempCreateEntities();
     }
+    
+    @Override
+    public void update()
+    {
+        //FIXME: we have to call this super method or appstates' updates aren't called
+        super.update();
+        //tempEntity.move(0.010f, 0, 0);
+    }
 
     private void tempCreateEntities()
     {
-        Spatial entity = worldManager.createEntity();
-        getRootNode().attachChild(entity);
+        tempEntity = worldManager.createEntity();
+        tempEntity.addControl(new SimpleStateCreatingControl());
     }
 
     private void initManagers()
     {
         commandListener = new ServerCommandManager(server);
-        worldManager = new WorldManager(assetManager);
+        worldManager = new WorldManager(getRootNode(), assetManager);
         stateManager = new ServerStateManager(worldManager, server);
 
+        getStateManager().attach(worldManager);
         getStateManager().attach(stateManager);
     }
 
@@ -63,9 +80,8 @@ public class ServerApplication extends SimpleApplication
         }
         catch (IOException e)
         {
-            //FIXME: add logging
-            e.printStackTrace();
-            System.exit(1);
+            LOG.error("Could not create server", e);
+            throw new RuntimeException(e);
         }
     }
 

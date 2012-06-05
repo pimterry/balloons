@@ -8,6 +8,8 @@ import org.housered.balloons.entity.SimpleStateReceivingControl;
 import org.housered.balloons.state.Snapshot;
 import org.housered.balloons.state.State;
 import org.housered.balloons.state.StateReceiver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jme3.network.Client;
 import com.jme3.network.Message;
@@ -25,6 +27,8 @@ import com.jme3.scene.Spatial;
  */
 public class ClientStateManager implements MessageListener<Client>
 {
+    private static final Logger LOG = LoggerFactory.getLogger(ClientStateManager.class);
+    
     private final WorldManager worldManager;
     private final Map<Long, StateReceiver> stateReceivers;
 
@@ -38,6 +42,7 @@ public class ClientStateManager implements MessageListener<Client>
     @Override
     public void messageReceived(Client client, Message message)
     {
+        LOG.trace("received message from server");
         handleSnapshot((Snapshot) message);
     }
 
@@ -60,6 +65,7 @@ public class ClientStateManager implements MessageListener<Client>
         }
         else
         {
+            LOG.debug("Creating new entity with id {}", state.getEntityId());
             Spatial newEntity = createNewStateReceivingEntity(entityId);
             stateReceiver = newEntity.getControl(StateReceiver.class);
             stateReceivers.put(entityId, stateReceiver);
