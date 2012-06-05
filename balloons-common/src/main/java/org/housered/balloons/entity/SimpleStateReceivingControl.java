@@ -50,8 +50,16 @@ public class SimpleStateReceivingControl extends AbstractControl implements Stat
             stateBuffer = temp;
         }
 
-        LOG.debug("Updating entity to position {}", ((SimpleState) stateBuffer).getPosition());
-        getSpatial().setLocalTranslation(((SimpleState) stateBuffer).getPosition());
+        SimpleState simpleState = (SimpleState) stateBuffer;
+
+        LOG.trace("Updating entity {} to position {}", simpleState.getEntityId(), simpleState.getPosition());
+        if (!getSpatial().getLocalTranslation().equals(simpleState.getPosition()))
+        {
+            LOG.debug("Entity {} moving from {} to {}", new Object[] {simpleState.getEntityId(),
+                    getSpatial().getLocalTranslation(), simpleState.getPosition()});
+        }
+        
+        getSpatial().setLocalTranslation(simpleState.getPosition());
     }
 
     @Override

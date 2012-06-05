@@ -22,4 +22,9 @@ public class FireWeaponCommand extends Command
     {
         return keyPressed;
     }
+    
+    public void executeWith(CommandExecutor executor)
+    {
+        executor.executeCommand(this);
+    }
 }

@@ -3,6 +3,8 @@ package org.housered.balloons.multiplayer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.housered.balloons.ClientApplication;
+import org.housered.balloons.InputControl;
 import org.housered.balloons.WorldManager;
 import org.housered.balloons.entity.SimpleStateReceivingControl;
 import org.housered.balloons.state.Snapshot;
@@ -23,17 +25,22 @@ import com.jme3.scene.Spatial;
  * This manager is also responsible for checking all incoming states for new entities, which it must
  * then create using the WorldManager.
  * 
- * @author Ed
+ * @author Eds
  */
+//TODO: actually an entity might have multiple state updates, because updating the position may
+//      have a separate control to updating the currently selected weapon
 public class ClientStateManager implements MessageListener<Client>
 {
     private static final Logger LOG = LoggerFactory.getLogger(ClientStateManager.class);
-    
+
     private final WorldManager worldManager;
     private final Map<Long, StateReceiver> stateReceivers;
+    private final ClientApplication app;
 
-    public ClientStateManager(WorldManager worldManager, Client client)
+    public ClientStateManager(ClientApplication app, WorldManager worldManager, Client client)
     {
+        //FIXME: remove this, just for hackiness
+        this.app = app;
         this.worldManager = worldManager;
         this.stateReceivers = new HashMap<Long, StateReceiver>();
         client.addMessageListener(this, Snapshot.class);
@@ -80,7 +87,11 @@ public class ClientStateManager implements MessageListener<Client>
         Spatial entity = worldManager.createEntity(entityId);
 
         //FIXME: add the correct state receiving control, create some factories
-        SimpleStateReceivingControl control = new SimpleStateReceivingControl();
+        entity.addControl( new SimpleStateReceivingControl());
+        
+        //FIXME: this is obviously terrible, the state message should tell us what is required
+        InputControl control = new InputControl(app.getInputManager());
+        control.registerSubscriber(app.commandTransmitter);
         entity.addControl(control);
 
         return entity;

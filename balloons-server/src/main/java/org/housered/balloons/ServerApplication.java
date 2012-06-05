@@ -7,6 +7,7 @@ import static org.housered.balloons.Globals.GAME_VERSION;
 
 import java.io.IOException;
 
+import org.housered.balloons.command.ColourChangingCommandExecutorControl;
 import org.housered.balloons.entity.SimpleStateCreatingControl;
 import org.housered.balloons.multiplayer.ServerCommandManager;
 import org.housered.balloons.multiplayer.ServerStateManager;
@@ -58,12 +59,13 @@ public class ServerApplication extends SimpleApplication
     {
         tempEntity = worldManager.createEntity();
         tempEntity.addControl(new SimpleStateCreatingControl());
+        tempEntity.addControl(new ColourChangingCommandExecutorControl());
     }
 
     private void initManagers()
     {
-        commandListener = new ServerCommandManager(server);
         worldManager = new WorldManager(getRootNode(), assetManager);
+        commandListener = new ServerCommandManager(server, worldManager);
         stateManager = new ServerStateManager(worldManager, server);
 
         getStateManager().attach(worldManager);
