@@ -8,16 +8,20 @@ import static org.housered.balloons.Globals.GAME_VERSION;
 import java.io.IOException;
 
 import org.housered.balloons.multiplayer.ServerCommandManager;
+import org.housered.balloons.multiplayer.ServerStateManager;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
+import com.jme3.scene.Spatial;
 import com.jme3.system.JmeContext.Type;
 
 public class ServerApplication extends SimpleApplication
 {
     private Server server;
     private ServerCommandManager commandListener;
+    private ServerStateManager stateManager;
+    private WorldManager worldManager;
 
     public static void main(String[] args)
     {
@@ -29,6 +33,23 @@ public class ServerApplication extends SimpleApplication
     public void simpleInitApp()
     {
         initNetwork();
+        initManagers();
+        tempCreateEntities();
+    }
+
+    private void tempCreateEntities()
+    {
+        Spatial entity = worldManager.createEntity();
+        getRootNode().attachChild(entity);
+    }
+    
+    private void initManagers()
+    {
+        commandListener = new ServerCommandManager(server);
+        worldManager = new WorldManager(assetManager);
+        stateManager = new ServerStateManager(worldManager, server);
+        
+        getStateManager().attach(stateManager);
     }
 
     private void initNetwork()
@@ -45,11 +66,6 @@ public class ServerApplication extends SimpleApplication
             e.printStackTrace();
             System.exit(1);
         }
-
-        commandListener = new ServerCommandManager();
-
-        server.addConnectionListener(commandListener);
-        server.addMessageListener(commandListener);
     }
 
     @Override

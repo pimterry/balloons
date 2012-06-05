@@ -6,8 +6,13 @@ import com.jme3.network.serializing.Serializable;
 @Serializable
 public class SimpleState implements State
 {
-    private final long entityId;
-    private final Vector3f position;
+    private long entityId;
+    private Vector3f position;
+
+    public SimpleState()
+    {
+
+    }
 
     public SimpleState(long entityId, Vector3f position)
     {

@@ -3,6 +3,7 @@ package org.housered.balloons.state;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
 
 /**
@@ -11,7 +12,7 @@ import com.jme3.network.serializing.Serializable;
  * @author Ed
  */
 @Serializable
-public class Snapshot
+public class Snapshot extends AbstractMessage
 {
     private List<State> states = new LinkedList<State>();
 

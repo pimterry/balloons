@@ -18,10 +18,16 @@ public class ServerCommandManager implements MessageListener<HostedConnection>, 
 {
     private Map<Integer, Queue<Command>> bufferedCommands = new HashMap<Integer, Queue<Command>>();
 
+    public ServerCommandManager(Server server)
+    {
+        server.addConnectionListener(this);
+        server.addMessageListener(this, Command.class);
+    }
+
     @Override
     public void messageReceived(HostedConnection source, Message message)
     {
-        //we could receive many different messsages in the future, design/refactoring required.
+        //we could receive many different messages in the future, design/refactoring required.
         Command cmd = (Command) message;
         bufferedCommands.get(source.getId()).add(cmd);
     }

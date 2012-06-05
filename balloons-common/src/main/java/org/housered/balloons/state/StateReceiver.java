@@ -1,6 +1,8 @@
 package org.housered.balloons.state;
 
-public interface StateReceiver
+import com.jme3.scene.control.Control;
+
+public interface StateReceiver extends Control
 {
     void updateWithState(State state);
 }

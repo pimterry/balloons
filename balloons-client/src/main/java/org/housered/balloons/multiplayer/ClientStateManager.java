@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.housered.balloons.WorldManager;
+import org.housered.balloons.entity.SimpleStateReceivingControl;
 import org.housered.balloons.state.Snapshot;
 import org.housered.balloons.state.State;
 import org.housered.balloons.state.StateReceiver;
@@ -11,6 +12,7 @@ import org.housered.balloons.state.StateReceiver;
 import com.jme3.network.Client;
 import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
+import com.jme3.scene.Spatial;
 
 /**
  * Snapshots are received from the server and define a list of states, one for each entity. This
@@ -58,10 +60,23 @@ public class ClientStateManager implements MessageListener<Client>
         }
         else
         {
-            stateReceiver = worldManager.createStateReceivingEntity(entityId, state);
+            Spatial newEntity = createNewStateReceivingEntity(entityId);
+            stateReceiver = newEntity.getControl(StateReceiver.class);
             stateReceivers.put(entityId, stateReceiver);
         }
 
         stateReceiver.updateWithState(state);
+    }
+
+    //FIXME: add actual entity type etc
+    private Spatial createNewStateReceivingEntity(long entityId)
+    {
+        Spatial entity = worldManager.createEntity(entityId);
+
+        //FIXME: add the correct state receiving control, create some factories
+        SimpleStateReceivingControl control = new SimpleStateReceivingControl();
+        entity.addControl(control);
+
+        return entity;
     }
 }
